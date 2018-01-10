@@ -11,8 +11,10 @@ namespace TurtleBot.Modules
                 $"The following commands are available:\n```" +
                 "!height:      Gets the current block height\n" +
                 "!hashrate:    Gets the current global hashrate\n" +
+                "!hash:        Gets the current hash of the last block\n" +
                 "!supply:      Gets the current circulating supply of TRTL\n" +
                 "!difficulty:  Gets the current difficulty\n" + 
                 "!help:        Prints this help dialog```");
+                
     }
 }
