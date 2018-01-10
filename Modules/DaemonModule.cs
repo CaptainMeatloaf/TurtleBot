@@ -66,5 +66,13 @@ namespace TurtleBot.Modules
             JObject lastBlockHeaderObject = await SendRpcRequest("getlastblockheader");
             await ReplyAsync($"The current difficulty is **{lastBlockHeaderObject["result"]["block_header"]["difficulty"]}**");
         }
+        
+        [Command("currenthash")]
+        [Alias("lasthash", "hash")]
+        public async Task CurrentHash()
+        {
+            JObject lastBlockHeaderObject = await SendRpcRequest("getlastblockheader");
+            await ReplyAsync($"The current hash is **{lastBlockHeaderObject["result"]["block_header"]["hash"]}**");
+        }
     }
 }
