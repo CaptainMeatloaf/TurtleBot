@@ -37,7 +37,7 @@ namespace TurtleBot.Modules
 
         [Command("currentheight")]
         [Alias("height", "bc_height")]
-        public async Task CurrentHeight()
+        public async Task CurrentHeight([Remainder] string ignore = null)
         {
             JObject blockCountObject = await SendRpcRequest("getblockcount");
             await ReplyAsync($"The current block height is **{string.Format(CultureInfo.InvariantCulture, "{0:N0}", (long)blockCountObject["result"]["count"])}**");
@@ -45,7 +45,7 @@ namespace TurtleBot.Modules
 
         [Command("currenthashrate")]
         [Alias("hashrate")]
-        public async Task CurrentHashrate()
+        public async Task CurrentHashrate([Remainder] string ignore = null)
         {
             JObject lastBlockHeaderObject = await SendRpcRequest("getlastblockheader");
             await ReplyAsync($"The current global hashrate is **{HashFormatter.Format((double)lastBlockHeaderObject["result"]["block_header"]["difficulty"] / 30)}/s**");
@@ -53,7 +53,7 @@ namespace TurtleBot.Modules
 
         [Command("currentsupply")]
         [Alias("supply")]
-        public async Task CurrentSupply()
+        public async Task CurrentSupply([Remainder] string ignore = null)
         {
             JObject lastBlockHeaderObject = await SendRpcRequest("getlastblockheader");
             JObject blockObject = await SendRpcRequest("f_block_json", $"{{ \"hash\":\"{lastBlockHeaderObject["result"]["block_header"]["hash"]}\"}}");
@@ -62,7 +62,7 @@ namespace TurtleBot.Modules
 
         [Command("currentdifficulty")]
         [Alias("difficulty", "diff")]
-        public async Task CurrentDifficulty()
+        public async Task CurrentDifficulty([Remainder] string ignore = null)
         {
             JObject lastBlockHeaderObject = await SendRpcRequest("getlastblockheader");
             await ReplyAsync($"The current difficulty is **{string.Format(CultureInfo.InvariantCulture, "{0:N0}", lastBlockHeaderObject["result"]["block_header"]["difficulty"])}**");

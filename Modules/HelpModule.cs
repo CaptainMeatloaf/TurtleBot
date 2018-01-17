@@ -6,7 +6,7 @@ namespace TurtleBot.Modules
     public class HelpModule : ModuleBase<SocketCommandContext>
     {
         [Command("help")]
-        public async Task Help(string commandToGetHelpFor = null)
+        public async Task Help(string commandToGetHelpFor = null, [Remainder] string ignore = null)
         {
             if(string.IsNullOrWhiteSpace(commandToGetHelpFor))
             {
