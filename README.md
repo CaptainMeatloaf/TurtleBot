@@ -16,7 +16,21 @@ Get a bot token by making an app (instructions [here](https://discord.foxbot.me/
 Create a file called `config.json` with the following contents
 ```
 {
-	"token": "<your token here>"
+  "token": "<your token here>",
+  "tags": {
+    "use": {
+      "approvedRoles": [ <approved role IDs for use here> ],
+      "approvedUsers": [ <approved user IDs for use here> ],
+      "permittedChannels": [ <channel IDs tags are allowed in here> ]
+    },
+    "edit": {
+      "approvedRoles": [ <approved role IDs for edit here> ],
+      "approvedUsers": [ <approved user IDs for edit here> ]
+    }
+  },
+  "database": {
+    "connectionString": "Filename=TurtleBot.db" //Or any other databse name/AQLite conenction string you desire
+  } 
 }
 ```
 
