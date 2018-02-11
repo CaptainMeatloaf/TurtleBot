@@ -24,7 +24,7 @@ namespace TurtleBot.Modules
         [Command("addtag")]
         public async Task AddTag(string tagName = "", [Remainder] string content = "")
         {
-            if (UserCanEditTags())
+            if (IsInPermittedChannel() && UserCanEditTags())
             {
                 if (String.IsNullOrWhiteSpace(tagName))
                 {
@@ -46,7 +46,7 @@ namespace TurtleBot.Modules
         [Alias("edittag")]
         public async Task UpdateTag(string tagName = "", [Remainder] string newContent = "")
         {
-            if (UserCanEditTags())
+            if (IsInPermittedChannel() && UserCanEditTags())
             {
                 if (String.IsNullOrWhiteSpace(tagName))
                 {
@@ -68,7 +68,7 @@ namespace TurtleBot.Modules
         [Alias("removetag")]
         public async Task DeleteTag(string tagName = "", [Remainder] string ignored = "")
         {
-            if (UserCanEditTags())
+            if (IsInPermittedChannel() && UserCanEditTags())
             {
                 if (String.IsNullOrWhiteSpace(tagName))
                 {
@@ -84,7 +84,7 @@ namespace TurtleBot.Modules
         [Alias("tags", "taglist")]
         public async Task GetTagList([Remainder] string ignored = "")
         {
-            if (UserCanUseTags())
+            if (IsInPermittedChannel() && UserCanUseTags())
             {
                 await ReplyAsync(tagService.GetTagList());
             }
@@ -94,7 +94,7 @@ namespace TurtleBot.Modules
         [Alias("tag")]
         public async Task GetTag([Remainder] string tagName = "")
         {
-            if (UserCanUseTags())
+            if (IsInPermittedChannel() && UserCanUseTags())
             {
                 if (String.IsNullOrWhiteSpace(tagName))
                 {
@@ -104,6 +104,12 @@ namespace TurtleBot.Modules
 
                 await ReplyAsync(tagService.GetTag(tagName));
             }
+        }
+
+        private bool IsInPermittedChannel()
+        {
+            IEnumerable<KeyValuePair<string, string>> permittedChannels = config.GetSection("tags:permittedChannels").AsEnumerable();
+            return Context.IsPrivate || permittedChannels.Any(x => x.Value == Context.Channel.Id.ToString());
         }
 
         private bool UserCanEditTags()
