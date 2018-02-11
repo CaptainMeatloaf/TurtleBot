@@ -87,7 +87,7 @@ namespace TurtleBot.Services
 
         public bool UpdateTag(string name, string newContent, SocketUser user)
         {
-            if (!String.IsNullOrWhiteSpace(this.GetTag(name)))
+            if (String.IsNullOrWhiteSpace(this.GetTag(name)))
             {
                 return false;
             }
@@ -152,7 +152,7 @@ namespace TurtleBot.Services
 
         public bool DeleteTag(string name, SocketUser user)
         {
-            if (!String.IsNullOrWhiteSpace(this.GetTag(name)))
+            if (String.IsNullOrWhiteSpace(this.GetTag(name)))
             {
                 return false;
             }
