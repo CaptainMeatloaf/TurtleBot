@@ -43,6 +43,7 @@ namespace TurtleBot.Modules
         }
 
         [Command("updatetag")]
+        [Alias("edittag")]
         public async Task UpdateTag(string tagName = "", [Remainder] string newContent = "")
         {
             if (UserCanEditTags())
@@ -64,13 +65,14 @@ namespace TurtleBot.Modules
         }
 
         [Command("deletetag")]
+        [Alias("removetag")]
         public async Task DeleteTag(string tagName = "", [Remainder] string ignored = "")
         {
             if (UserCanEditTags())
             {
                 if (String.IsNullOrWhiteSpace(tagName))
                 {
-                    await ReplyAsync("You must specify a name for the tag to update!");
+                    await ReplyAsync("You must specify a name for the tag to delete!");
                     return;
                 }
 
@@ -90,10 +92,16 @@ namespace TurtleBot.Modules
 
         [Command("gettag")]
         [Alias("tag")]
-        public async Task GetTag(string tagName, [Remainder] string ignored = "")
+        public async Task GetTag([Remainder] string tagName = "")
         {
             if (UserCanUseTags())
             {
+                if (String.IsNullOrWhiteSpace(tagName))
+                {
+                    await ReplyAsync("You must specify a tag name to get!");
+                    return;
+                }
+
                 await ReplyAsync(tagService.GetTag(tagName));
             }
         }
