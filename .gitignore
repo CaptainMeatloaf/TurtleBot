@@ -330,3 +330,9 @@ ASALocalRun/
 
 # Config File
 config.json
+
+#Database
+TurtleBot.db
+
+#Logging
+Logs/
