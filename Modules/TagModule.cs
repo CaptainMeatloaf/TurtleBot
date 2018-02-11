@@ -24,7 +24,7 @@ namespace TurtleBot.Modules
         [Command("addtag")]
         public async Task AddTag(string tagName = "", [Remainder] string content = "")
         {
-            if (UserCanUseTags())
+            if (UserCanEditTags())
             {
                 if (String.IsNullOrWhiteSpace(tagName))
                 {
