@@ -29,11 +29,11 @@ Create a file called `config.json` with the following contents
 	"permittedChannels": [ <channel IDs tags are allowed in here> ]
   },
   "database": {
-    "connectionString": "Filename=TurtleBot.db" //Or any other databse name/SQLite conenction string you desire
+    "connectionString": "Filename=TurtleBot.db" //Or any other database name/SQLite conenction string you desire
   } 
 }
 ```
 
 **DO NOT SHARE YOUR TOKEN WITH ANYBODY**
 
-Further instructions vary by your IDE. Project should open up straight away and bre ready to go in VS Code.
+Further instructions vary by your IDE. Project should open up straight away and be ready to go in VS Code.
