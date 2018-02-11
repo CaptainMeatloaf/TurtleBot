@@ -19,7 +19,7 @@ namespace TurtleBot.Modules
 
         private async Task<JObject> SendRpcRequest(string method, string parameters = "{}")
         {
-            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, "http://us.turtlepool.space:11899/json_rpc");
+            HttpRequestMessage requestMessage = new HttpRequestMessage(HttpMethod.Post, "http://eu.turtlepool.space:11899/json_rpc");
             string content = $"{{ \"jsonrpc\":\"2.0\", \"method\":\"{method}\", \"params\":{parameters}, \"id\":{requestid++} }}";
             requestMessage.Content = new StringContent(content, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await client.SendAsync(requestMessage);
