@@ -43,8 +43,13 @@ namespace TurtleBot.Services
 
         #region Tags
 
-        public bool InsertTag(string name, string content, SocketUser user)
+        public string InsertTag(string name, string content, SocketUser user)
         {
+            if (!String.IsNullOrWhiteSpace(this.GetTag(name)))
+            {
+                return "Tag already exists!";
+            }
+
             using (SqliteConnection db = new SqliteConnection(config.GetSection("database")["connectionString"]))
             {
                 db.Open();
@@ -70,18 +75,23 @@ namespace TurtleBot.Services
                     catch (SqliteException e)
                     {
                         logger.LogError($"SQLite error inserting tag: {e.Message}");
-                        return false;
+                        return "Exception when inserting tag. Please inform CodIsAFish (<@186504834201944064>) about this.";
                     }
 
                     logger.LogInformation($"User {user.Username}#{user.Discriminator} ({user.Id}) added tag \"{name}\" with content \"{content}\"");
 
-                    return true;
+                    return "Success";
                 }
             }
         }
 
         public bool UpdateTag(string name, string newContent, SocketUser user)
         {
+            if (!String.IsNullOrWhiteSpace(this.GetTag(name)))
+            {
+                return false;
+            }
+
             using (SqliteConnection db = new SqliteConnection(config.GetSection("database")["connectionString"]))
             {
                 db.Open();
@@ -96,7 +106,7 @@ namespace TurtleBot.Services
                     var result = selectTagToUpdateCommand.ExecuteScalar();
                     if (result == null)
                     {
-                        logger.LogError($"User {user.Id} attempted up update nonexistent tag {name}");
+                        logger.LogError($"User {user.Username}#{user.Discriminator} ({user.Id}) attempted up update nonexistent tag {name}");
                         return false;
                     }
                     else
@@ -142,6 +152,11 @@ namespace TurtleBot.Services
 
         public bool DeleteTag(string name, SocketUser user)
         {
+            if (!String.IsNullOrWhiteSpace(this.GetTag(name)))
+            {
+                return false;
+            }
+
             // Update the revision to reflect the name of the tag before it was deleted
             if (!this.UpdateTag(name, name, user))
             {
@@ -217,7 +232,7 @@ namespace TurtleBot.Services
                     content = result?.ToString();
                     if (String.IsNullOrWhiteSpace(content))
                     {
-                        logger.LogError($"Tag \"{name}\" gave empty or null content. Possible partial deletion.");
+                        logger.LogWarning($"Tag \"{name}\" gave empty or null content. Possible partial deletion, or new tag is being added.");
                         return null;
                     }
                 }

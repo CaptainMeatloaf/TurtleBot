@@ -23,14 +23,7 @@ namespace TurtleBot.Services
 
         public string AddTag(string tagName, string tagContent, SocketUser user)
         {
-            if (databaseService.InsertTag(tagName, tagContent, user))
-            {
-                return $"Added tag **{tagName}**";
-            }
-            else
-            {
-                return $"Failed to add tag **{tagName}**. Please inform CodIsAFish (<@186504834201944064>) about this.";
-            }
+            return $"Adding of tag **{tagName}** finished with status: **{databaseService.InsertTag(tagName, tagContent, user)}**";
         }
 
         public string UpdateTag(string tagName, string newContent, SocketUser user)
@@ -41,7 +34,7 @@ namespace TurtleBot.Services
             }
             else
             {
-                return $"Failed to update tag **{tagName}**. Does the tag that you are tying to update exist?\n\nIf it does, please inform CodIsAFish (<@186504834201944064>).";
+                return $"Failed to update tag **{tagName}**. Does the tag that you are trying to update exist?\n\nIf it does, please inform CodIsAFish (<@186504834201944064>).";
             }
         }
 
@@ -53,7 +46,7 @@ namespace TurtleBot.Services
             }
             else
             {
-                return $"Failed to delete tag **{tagName}**. Does the tag that you are tying to delete exist?\n\nIf it does, please inform CodIsAFish (<@186504834201944064>).";
+                return $"Failed to delete tag **{tagName}**. Does the tag that you are trying to delete exist?\n\nIf it does, please inform CodIsAFish (<@186504834201944064>).";
             }
         }
 
@@ -75,7 +68,7 @@ namespace TurtleBot.Services
             string content = databaseService.GetTag(name);
             if (String.IsNullOrWhiteSpace(content))
             {
-                return $"No tags with the name \"{name}\" were found!";
+                return $"There is no tag with the name **{name}**";
             }
             else
             {
