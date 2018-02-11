@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using Discord;
 using Discord.Commands;
 
 namespace TurtleBot.Modules
@@ -6,6 +7,7 @@ namespace TurtleBot.Modules
     public class HelpModule : ModuleBase<SocketCommandContext>
     {
         [Command("help")]
+        [RequireBotPermission(ChannelPermission.SendMessages)]
         public async Task Help(string commandToGetHelpFor = null, [Remainder] string ignore = null)
         {
             if(string.IsNullOrWhiteSpace(commandToGetHelpFor))

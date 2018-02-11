@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Discord;
 using Discord.Commands;
 using Discord.WebSocket;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +23,7 @@ namespace TurtleBot.Modules
         }
 
         [Command("addtag")]
+        [RequireBotPermission(ChannelPermission.SendMessages)]
         public async Task AddTag(string tagName = "", [Remainder] string content = "")
         {
             if (IsInPermittedChannel() && UserCanEditTags())
@@ -44,6 +46,7 @@ namespace TurtleBot.Modules
 
         [Command("updatetag")]
         [Alias("edittag")]
+        [RequireBotPermission(ChannelPermission.SendMessages)]
         public async Task UpdateTag(string tagName = "", [Remainder] string newContent = "")
         {
             if (IsInPermittedChannel() && UserCanEditTags())
@@ -66,6 +69,7 @@ namespace TurtleBot.Modules
 
         [Command("deletetag")]
         [Alias("removetag")]
+        [RequireBotPermission(ChannelPermission.SendMessages)]
         public async Task DeleteTag(string tagName = "", [Remainder] string ignored = "")
         {
             if (IsInPermittedChannel() && UserCanEditTags())
@@ -82,6 +86,7 @@ namespace TurtleBot.Modules
 
         [Command("gettaglist")]
         [Alias("tags", "taglist")]
+        [RequireBotPermission(ChannelPermission.SendMessages)]
         public async Task GetTagList([Remainder] string ignored = "")
         {
             if (IsInPermittedChannel() && UserCanUseTags())
@@ -92,6 +97,7 @@ namespace TurtleBot.Modules
 
         [Command("gettag")]
         [Alias("tag")]
+        [RequireBotPermission(ChannelPermission.SendMessages)]
         public async Task GetTag([Remainder] string tagName = "")
         {
             if (IsInPermittedChannel() && UserCanUseTags())

@@ -8,6 +8,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using TurtleBot.Utilities;
 using System.Globalization;
+using Discord;
 
 namespace TurtleBot.Modules
 {
@@ -37,6 +38,7 @@ namespace TurtleBot.Modules
 
         [Command("currentheight")]
         [Alias("height", "bc_height")]
+        [RequireBotPermission(ChannelPermission.SendMessages)]
         public async Task CurrentHeight([Remainder] string ignore = null)
         {
             JObject blockCountObject = await SendRpcRequest("getblockcount");
@@ -45,6 +47,7 @@ namespace TurtleBot.Modules
 
         [Command("currenthashrate")]
         [Alias("hashrate")]
+        [RequireBotPermission(ChannelPermission.SendMessages)]
         public async Task CurrentHashrate([Remainder] string ignore = null)
         {
             JObject lastBlockHeaderObject = await SendRpcRequest("getlastblockheader");
@@ -53,6 +56,7 @@ namespace TurtleBot.Modules
 
         [Command("currentsupply")]
         [Alias("supply")]
+        [RequireBotPermission(ChannelPermission.SendMessages)]
         public async Task CurrentSupply([Remainder] string ignore = null)
         {
             JObject lastBlockHeaderObject = await SendRpcRequest("getlastblockheader");
@@ -62,6 +66,7 @@ namespace TurtleBot.Modules
 
         [Command("currentdifficulty")]
         [Alias("difficulty", "diff")]
+        [RequireBotPermission(ChannelPermission.SendMessages)]
         public async Task CurrentDifficulty([Remainder] string ignore = null)
         {
             JObject lastBlockHeaderObject = await SendRpcRequest("getlastblockheader");
