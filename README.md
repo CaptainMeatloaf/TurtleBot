@@ -20,16 +20,16 @@ Create a file called `config.json` with the following contents
   "tags": {
     "use": {
       "approvedRoles": [ <approved role IDs for use here> ],
-      "approvedUsers": [ <approved user IDs for use here> ],
-      "permittedChannels": [ <channel IDs tags are allowed in here> ]
+      "approvedUsers": [ <approved user IDs for use here> ]
     },
     "edit": {
       "approvedRoles": [ <approved role IDs for edit here> ],
       "approvedUsers": [ <approved user IDs for edit here> ]
-    }
+    },
+	"permittedChannels": [ <channel IDs tags are allowed in here> ]
   },
   "database": {
-    "connectionString": "Filename=TurtleBot.db" //Or any other databse name/AQLite conenction string you desire
+    "connectionString": "Filename=TurtleBot.db" //Or any other databse name/SQLite conenction string you desire
   } 
 }
 ```
