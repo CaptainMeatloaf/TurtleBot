@@ -40,6 +40,10 @@ namespace TurtleBot
                 .AddSingleton(_client)
                 .AddSingleton<CommandService>()
                 .AddSingleton<CommandHandlingService>()
+                // Database
+                .AddSingleton<DatabaseService>()
+                // Tags
+                .AddSingleton<TagService>()
                 // Logging
                 .AddLogging()
                 .AddSingleton<LogService>()
