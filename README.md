@@ -28,6 +28,20 @@ Create a file called `config.json` with the following contents
     },
 	"permittedChannels": [ <channel IDs tags are allowed in here> ]
   },
+  "stars": {
+    "minimumThreshold": <minimum number of stars required to post something to the starboard>,
+    "starboardChannelId": <the ID of the starboard channel>,
+    "excludedChannels": [ <channels that should not be included here> ],
+    "excludedRoles": [ <roles that are not allowed to participate here> ], 
+    "ban": {
+      "approvedUsers": [ <users that are allowed to ban people from the starboard here> ],
+      "approvedRoles": [ <roles that are allowed to ban people from the starboard here> ]
+    },
+    "lock": {
+      "approvedUsers": [ <users that are allowed to lock the starboard here> ],
+      "approvedRoles": [ <roles that are allowed to lock the starboard here> ]
+    }
+  },
   "database": {
     "connectionString": "Filename=TurtleBot.db" //Or any other database name/SQLite conenction string you desire
   } 
