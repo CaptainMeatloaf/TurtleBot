@@ -20,11 +20,12 @@ namespace TurtleBot
 
         public async Task MainAsync()
         {
-            _client = new DiscordSocketClient();
+            _client = new DiscordSocketClient(new DiscordSocketConfig { AlwaysDownloadUsers = true });
             _config = BuildConfig();
 
             var services = ConfigureServices();
             services.GetRequiredService<LogService>();
+            services.GetRequiredService<StarService>(); // Mark as required so the reaction event handlers are loaded
             await services.GetRequiredService<CommandHandlingService>().InitializeAsync(services);
 
             await _client.LoginAsync(TokenType.Bot, _config["token"]);
@@ -44,6 +45,8 @@ namespace TurtleBot
                 .AddSingleton<DatabaseService>()
                 // Tags
                 .AddSingleton<TagService>()
+                //Stars
+                .AddSingleton<StarService>()
                 // Logging
                 .AddLogging()
                 .AddSingleton<LogService>()
