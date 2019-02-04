@@ -53,7 +53,7 @@ namespace TurtleBot.Services
         public string GetTagList()
         {
             List<String> tagList = databaseService.GetTagList();
-            tagList.sort();
+            tagList.Sort();
             if (tagList.Any())
             {
                 return $"Current tag list: {String.Join(", ", tagList.Select(x => $"`{x}`"))}";
